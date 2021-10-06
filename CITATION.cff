@@ -1,0 +1,37 @@
+cff-version: 0.9.0
+message: If you use this software, please cite it as below.
+title: MPM-Julia
+keywords:
+- MPM
+- Julia
+preferred-citation:
+  type: article
+  title: Programming the material point method in Julia
+  authors:
+  - family-names: Sinaie
+    given-names: Sina
+  - family-names: Nguyen
+    given-names: Vinh Phu
+    affiliation: Department of Civil Engineering, Monash University
+    email: phu.nguyen@monash.edu
+  - family-names: Nguyen
+    given-names: Chi Thanh
+  - family-names: Bordas
+    given-names: Stephane
+  keywords:
+  - Julia
+  - Material point method (MPM)
+  - High-performance dynamic programming language
+  - Technical computing
+  languages:
+  - eng
+  doi: 10.1016/j.advengsoft.2017.01.008
+  journal: Advances in Engineering Software
+  publisher: Elsevier B.V.
+  year: 2017
+  volume: 105
+  start: 17
+  end: 29
+url: https://github.com/JuliaPapers/MPM-Julia
+version: 1.1.0
+date-released: 2021-10-06
