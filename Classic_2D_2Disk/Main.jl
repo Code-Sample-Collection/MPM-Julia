@@ -339,4 +339,5 @@ PyPlot.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0, fontsize=8)
 PyPlot.savefig("./_img/plot_2Disk_Julia.pdf")
 end # mpmMain
 
+isdir("_img") || mkdir("_img")
 mpmMain()

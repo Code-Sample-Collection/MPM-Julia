@@ -294,7 +294,8 @@ for fTime in 0.0:fTimeIncrement:fTimeEnd
         end
         PyPlot.using3D()
         PyPlot.clf()
-        pyPlot01 = PyPlot.gca(projection="3d")
+        PyPlot.subplot(projection="3d")
+        pyPlot01 = PyPlot.gca()
         # pyPlot01 = PyPlot.subplot2grid((5,5), (0,0), colspan=4, rowspan=5, projection="3d")
         scat = PyPlot.scatter3D(array_x, array_y, array_z, lw=0, c=array_color, s=array_size)
 
@@ -396,4 +397,5 @@ PyPlot.plot(plot_Time, plot_Displacement, "-", linewidth=1.0)
 PyPlot.savefig("./_img/plot_Cantilever_Julia.pdf")
 end # mpmMain
 
+isdir("_img") || mkdir("_img")
 mpmMain()

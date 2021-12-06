@@ -459,4 +459,5 @@ PyPlot.savefig("./_img/plot_KineticEnergy.pdf")
 
 end # mpmMain
 
+isdir("_img") || mkdir("_img")
 mpmMain()
