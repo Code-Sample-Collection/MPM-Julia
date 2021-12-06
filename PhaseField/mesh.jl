@@ -62,7 +62,7 @@ mutable struct Mesh
 end # Mesh
 
 # Write mesh node and connectivity data to screen
-function write_to_file(mesh::Mesh)
+function write_to_file(mesh::FeMesh.Mesh)
     for i = 1:mesh.nodeCount
         @printf("%f, %f\n", mesh.nodes[1,i], mesh.nodes[2,i])
     end
@@ -73,7 +73,7 @@ function write_to_file(mesh::Mesh)
     end
 end
 
-function vtk(mesh::Mesh, phi::Array{Float64}, vtuFile::String)
+function vtk(mesh::FeMesh.Mesh, phi::Array{Float64}, vtuFile::String)
     results_vtu        = open(vtuFile, "w")
     numVertexesPerCell = 4
     VTKCellCode        = 9
@@ -137,7 +137,7 @@ function vtk(mesh::Mesh, phi::Array{Float64}, vtuFile::String)
     close(results_vtu);
 end
 
-function update(mesh::Mesh, materialPoints::Vector{mpmMaterialPoint_2D_Classic})
+function update(mesh::FeMesh.Mesh, materialPoints::Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic})
     elem2MPTemp = Dict{Int64, Vector{Int64}}()
     for iIndex_MP in 1:length(materialPoints)
         thisMP      = materialPoints[iIndex_MP]
@@ -153,7 +153,7 @@ function update(mesh::Mesh, materialPoints::Vector{mpmMaterialPoint_2D_Classic})
     mesh.elem2MP = elem2MPTemp
 end
 
-function findAdjacentPoints(xp::Vector{Float64}, mesh::Mesh)
+function findAdjacentPoints(xp::Vector{Float64}, mesh::FeMesh.Mesh)
     iBottomLeft_i    = Int64( (floor(xp[1] / mesh.deltaX) + 1.0) )
     iBottomLeft_j    = Int64( (floor(xp[2] / mesh.deltaY) + 1.0) )
 
@@ -165,7 +165,7 @@ function findAdjacentPoints(xp::Vector{Float64}, mesh::Mesh)
     return((thisAdjacentGridPoints))
 end
 
-function plot_mesh(mesh::Mesh)
+function plot_mesh(mesh::FeMesh.Mesh)
     ord = [1,2,3,4,1]
     xpt = zeros(5)
     ypt = zeros(5)

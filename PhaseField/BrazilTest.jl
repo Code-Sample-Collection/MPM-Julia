@@ -438,4 +438,5 @@ end # end of time loop
 
 end # end of mpmMain()
 
+isdir("_img") || mkdir("_img")
 mpmMain()

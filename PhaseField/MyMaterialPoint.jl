@@ -1,7 +1,7 @@
 module moduleMaterialPoint
 
 using LinearAlgebra
-export mpmMaterialPoint_2D_Classic
+export mpmMaterialPoint_2D_Classic, createMaterialDomain_Rectangle
 
 mutable struct mpmMaterialPoint_2D_Classic   #material point container
     fMass           :: Float64
@@ -46,6 +46,23 @@ mutable struct mpmMaterialPoint_2D_Classic   #material point container
             0.0
         )
     end
+end
+
+function createMaterialDomain_Rectangle(v2Center::Vector{Float64}, fWidth::Float64, fHeight::Float64, fOffset::Float64)
+    thisMaterialDomain = Vector{mpmMaterialPoint_2D_Classic}(undef, 0)
+
+    fWidth    = floor(fWidth/fOffset) * fOffset    #just in case width is not a multiple of offset
+    fHeight    = floor(fHeight/fOffset) * fOffset    #just in case height is not a multiple of offset
+
+    for fy = -0.5*fHeight+0.5*fOffset:fOffset:+0.5*fHeight-0.5*fOffset
+        for fx = -0.5*fWidth+0.5*fOffset:fOffset:+0.5*fWidth-0.5*fOffset
+            thisMaterialPoint = mpmMaterialPoint_2D_Classic()
+            thisMaterialPoint.v2Centroid = v2Center + [fx; fy]
+            push!(thisMaterialDomain, thisMaterialPoint)
+        end
+    end
+
+    return(thisMaterialDomain)
 end
 
 # compute stress using Amor's tension/compression split

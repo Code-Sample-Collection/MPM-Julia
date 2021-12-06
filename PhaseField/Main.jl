@@ -25,6 +25,7 @@ include("MyBasis.jl")
 using .moduleGrid
 using .moduleBasis
 
+
 function mpmMain()
 
 nsd      = 2
@@ -36,6 +37,8 @@ k        = 1.0e-10
 shear    = young/2.0/(1.0+poisson)
 lambda   = young*poisson/(1.0+poisson)/(1.0-2.0*poisson)
 bulk     = lambda + 2.0*shear/nsd
+l0       = 0.0005    # length scale in phase field model [m]
+Gc       = 1.5e5     # fracture energy [J/m]
 P        = [0.5 0.5 0.0;-0.5 0.5 0.0;0.0 0.0 1.0]
 
 fTimeEnd = 1.0
@@ -56,8 +59,7 @@ thisGrid = moduleGrid.mpmGrid(lx, ly, ex+1, ey+1)
 # array holding all material points (these are references to MaterialDomain_01 & 02)
 allMaterialPoint = Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic}(undef, 0)
 fOffset = lx/(ex+1.0)/2
-thisMaterialDomain_02 = moduleMaterialPoint.createMaterialDomain_Rectangle([0.5; 0.5],
-                                                                        lx, ly, fOffset)
+thisMaterialDomain_02 = moduleMaterialPoint.createMaterialDomain_Rectangle([0.5; 0.5], lx, ly, fOffset)
 for iIndex_MP = 1:1:length(thisMaterialDomain_02)
     fVolume   = fOffset*fOffset#3.14159*0.2*0.2/length(thisMaterialDomain_02)
     fMass     = density*fVolume
@@ -132,7 +134,7 @@ while fTime < fTimeEnd
     #######################################
     #  solve for the phase field
     #######################################
-    solve_fe(phase_field, feMesh, allMaterialPoint)
+    solve_fe(phase_field, feMesh, allMaterialPoint, l0, Gc)
 
     #######################################
     #  solve for the mechanical fields

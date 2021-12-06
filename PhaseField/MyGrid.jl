@@ -136,7 +136,7 @@ end
 # find the grid points of elements that contain particles
 # return Vector{Int64}
 function getGridPointsForParticles(
-    particles::Vector{mpmMaterialPoint_2D_Classic},
+    particles::Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic},
     thisGrid::mpmGrid
 )
     set = BitSet()
@@ -154,7 +154,7 @@ end
 # update the material points inside every elements/cells
 function update(
     mesh::mpmGrid,
-    materialPoints::Vector{mpmMaterialPoint_2D_Classic}
+    materialPoints::Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic}
 )
     elem2MPTemp = Dict{Int64,Vector{Int64}}()
     for iIndex_MP in 1:length(materialPoints)

@@ -70,7 +70,7 @@ young1   = 70.0e18   # Pa
 k        = 1.0e-18
 l0       = 0.0005    # length scale in phase field model [m]
 Gc       = 1.5e5     # fracture energy [J/m]
-        P        = [0.5 0.5 0.0;-0.5 0.5 0.0;0.0 0.0 1.0]
+P        = [0.5 0.5 0.0;-0.5 0.5 0.0;0.0 0.0 1.0]
 
 shear, bulk    = getShearBulkMod(young , poisson, nsd)
 shear1,bulk1   = getShearBulkMod(young1, poisson, nsd)
@@ -478,4 +478,5 @@ while fTime < fTimeEnd
 end # end of time loop
 end # end of mpmMain()
 
+isdir("_img") || mkdir("_img")
 mpmMain()

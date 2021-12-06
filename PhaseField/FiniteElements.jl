@@ -64,8 +64,8 @@ function getNdNdx(x::Vector{Float64}, xI::Vector{Float64}, dx::Float64, dy::Floa
 end
 
 function fe_matrices(
-    mesh::Mesh,
-    materialPoints::Vector{mpmMaterialPoint_2D_Classic},
+    mesh::FeMesh.Mesh,
+    materialPoints::Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic},
     F,
     l0,
     gc
@@ -138,8 +138,8 @@ end # fe_matrices
 
 function solve_fe(
     phi::Vector{Float64},
-    mesh::Mesh,
-    materialPoints::Vector{mpmMaterialPoint_2D_Classic},
+    mesh::FeMesh.Mesh,
+    materialPoints::Vector{moduleMaterialPoint.mpmMaterialPoint_2D_Classic},
     l0,
     Gc
 )
